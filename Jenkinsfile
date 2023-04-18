@@ -35,8 +35,7 @@ stage('Deploy Stage') {
       }
 stage('Kubernetes'){
   steps{
-    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentials: 'AWS_SECRET_ACCESS_KEY')]) {
-      sh "aws eks update-kubeconfig --region us-east-1 --name $(cluster_name)"
+     withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_SECRET_ACCESS_KEY')]) {
       script{
         try{
           sh "kubectl create namespace ${namespace}"
